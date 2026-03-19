@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4VTJJM4');
+  </script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Final Expense</title>
+  <style>
+    :root {
+      --blue: #1f5f8b;
+      --blue-soft: #eaf4fb;
+      --green: #2d8f6f;
+      --green-dark: #1f7459;
+      --warm: #fff8ef;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --border: rgba(31, 95, 139, 0.14);
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, var(--blue-soft) 0%, var(--warm) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .top-bar {
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+    }
+
+    .content {
+      padding: 34px 28px 30px;
+      text-align: center;
+    }
+
+    .trust-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #f4fbf8;
+      color: var(--green-dark);
+      border: 1px solid rgba(45, 143, 111, 0.16);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 auto 18px auto;
+      justify-content: center;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      margin: 0 0 14px;
+      color: #163d5a;
+      text-align: center;
+    }
+
+    .subheadline {
+      margin: 0 auto 26px;
+      font-size: clamp(17px, 2.3vw, 20px);
+      line-height: 1.55;
+      color: var(--muted);
+      text-align: center;
+      max-width: 640px;
+    }
+
+    .panel-wrap {
+      position: relative;
+      min-height: 340px;
+    }
+
+    .step {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateX(26px) scale(.985);
+      pointer-events: none;
+      transition: opacity .45s ease, transform .45s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .step.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .question-box,
+    .result-box {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border: 1px solid rgba(31, 95, 139, 0.1);
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .step-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .question {
+      font-size: clamp(26px, 3vw, 34px);
+      line-height: 1.2;
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 26px;
+      color: #153a57;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .option-btn,
+    .call-btn,
+    .start-btn {
+      appearance: none;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .option-btn {
+      background: linear-gradient(90deg,#0f766e,#22c55e);
+      color: white;
+      padding: 18px 16px;
+      border: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .option-btn:hover,
+    .start-btn:hover,
+    .call-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .option-btn:active,
+    .start-btn:active,
+    .call-btn:active {
+      transform: translateY(0);
+    }
+
+    .intro-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .intro-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    .start-btn,
+    .call-btn {
+      width: 100%;
+      padding: 22px 24px;
+      background: linear-gradient(90deg,#0f766e,#22c55e);
+      color: white;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: .03em;
+    }
+
+    .result-title {
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.15;
+      text-align: center;
+      margin: 0 0 16px;
+      color: #16614b;
+      font-weight: 900;
+    }
+
+    .result-text {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text);
+      text-align: center;
+      margin: 0 0 22px;
+    }
+
+    .phone-highlight {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      text-align: center;
+      color: #123b58;
+      margin: 0 0 20px;
+    }
+
+    .urgency {
+      margin-top: 16px;
+      background: #fff7ea;
+      border: 1px solid rgba(210, 136, 46, 0.18);
+      color: #8a5a12;
+      padding: 14px 16px;
+      border-radius: 16px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .progress {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .progress span {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: #e8eef3;
+      transition: background .3s ease;
+    }
+
+    .progress span.active {
+      background: linear-gradient(90deg, var(--blue), var(--green));
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 13px;
+      color: #7b8794;
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+        display: block;
+      }
+
+      .wrapper {
+        max-width: 100%;
+      }
+
+      .content {
+        padding: 22px 16px 20px;
+      }
+
+      .trust-row {
+        font-size: 13px;
+        line-height: 1.4;
+        padding: 10px 12px;
+      }
+
+      h1 {
+        font-size: 30px;
+        line-height: 1.15;
+      }
+
+      .subheadline {
+        font-size: 17px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+
+      .question-box,
+      .result-box {
+        padding: 22px 16px;
+        border-radius: 18px;
+      }
+
+      .question {
+        font-size: 28px;
+        margin-bottom: 22px;
+      }
+
+      .result-title {
+        font-size: 30px;
+      }
+
+      .result-text {
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      .phone-highlight {
+        font-size: 32px;
+        line-height: 1.15;
+        word-break: break-word;
+      }
+
+      .option-btn,
+      .call-btn {
+        min-height: 56px;
+        font-size: 18px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-wrap {
+        min-height: 430px;
+      }
+
+      .footer-note {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4VTJJM4"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="wrapper">
+    <div class="card">
+      <div class="top-bar"></div>
+      <div class="content">
+        <div class="trust-row">Información rápida · Proceso breve · Atención en español</div>
+
+        <div id="intro-header">
+        <h1>Descubre en menos de 30 segundos si podrías calificar para este beneficio de Final Expense</h1>
+        <p class="subheadline">Responde estas 2 preguntas rápidas para ver si puedes calificar.</p>
+        </div>
+
+        <div class="panel-wrap">
+          <section class="step active" id="step-1">
+            <div class="question-box">
+              
+              <div class="step-label">Paso 1 de 3</div>
+              <h2 class="question">¿Tienes más de 50 años?</h2>
+              <div class="options">
+                <button class="option-btn" data-next="2">Sí</button>
+                <button class="option-btn" data-next="2">No</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="step" id="step-2">
+            <div class="question-box">
+              <div class="step-label">Paso 2 de 3</div>
+              <h2 class="question">¿Vives en los Estados Unidos?</h2>
+              <div class="options">
+                <button class="option-btn" data-next="3">Sí</button>
+                <button class="option-btn" data-next="3">No</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="step" id="step-3">
+            <div class="result-box">
+              <div class="step-label">Paso 3 de 3</div>
+              <h2 class="result-title">¡FELICIDADES! CALIFICAS PARA ACCEDER A ESTE BENEFICIO DE FINAL EXPENSE.</h2>
+              <p class="result-text">
+                Para asegurarlo, solo debes llamar ahora al número que aparece abajo y hablar con un agente que puede darte información importante sobre tu beneficio.
+              </p>
+              
+              <a class="call-btn" href="tel:+18334439191">📞 LLAMAR AHORA (833) 443-9191</a>
+              <div class="urgency">
+                Llama ahora, tu agente está esperando con información importante sobre tu beneficio.
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="progress" aria-label="Progreso del quiz">
+          <span class="active"></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <p class="footer-note">
+          Diseño pensado para transmitir confianza, claridad y una experiencia simple para el mercado hispano en USA.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const progressBars = document.querySelectorAll('.progress span');
+
+    function goToStep(stepNumber) {
+      const introHeader = document.getElementById('intro-header');
+
+      if(stepNumber >= 2){
+        introHeader.style.display = 'none';
+      } else {
+        introHeader.style.display = 'block';
+      }
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === stepNumber - 1);
+      });
+
+      progressBars.forEach((bar, index) => {
+        bar.classList.toggle('active', index <= stepNumber - 1);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.option-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const next = Number(button.dataset.next);
+        goToStep(next);
+      });
+    });
+  </script>
+</body>
+</html>
