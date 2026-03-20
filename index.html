@@ -406,10 +406,38 @@
               <div class="step-label">Paso 3 de 3</div>
               <h2 class="result-title">¡FELICIDADES! CALIFICAS PARA ACCEDER A ESTE BENEFICIO DE FINAL EXPENSE.</h2>
               <p class="result-text">
-                Para asegurarlo, solo debes llamar ahora al número que aparece abajo y hablar con un agente que puede darte información importante sobre tu beneficio.
-              </p>
-              
-              <a class="call-btn" href="tel:+18334439191">📞 LLAMAR AHORA (833) 443-9191</a>
+  Para asegurarlo, primero confirma que estás listo para hablar con un agente. La llamada toma solo unos minutos y podría ayudarte a verificar tu beneficio hoy.
+</p>
+
+<div id="precall-step" style="margin-top: 16px;">
+  <p style="font-weight: 600; margin-bottom: 12px;">
+    ¿Estás listo para llamar ahora?
+  </p>
+
+  <button
+    type="button"
+    onclick="document.getElementById('precall-step').style.display='none'; document.getElementById('call-container').style.display='block';"
+    style="
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(135deg, #159a8c 0%, #2ecc71 100%);
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      padding: 18px 24px;
+      font-size: 22px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    "
+  >
+    Sí, quiero continuar
+  </button>
+</div>
+
+<div id="call-container" style="display: none; margin-top: 16px;">
+  <a class="call-btn" href="tel:+18334439191">📞 LLAMAR AHORA (833) 443-9191</a>
+</div>
               <div class="urgency">
                 Llama ahora, tu agente está esperando con información importante sobre tu beneficio.
               </div>
