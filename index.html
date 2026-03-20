@@ -439,7 +439,39 @@
   <a class="call-btn" href="tel:+18334439191">📞 LLAMAR AHORA (833) 443-9191</a>
 </div>
               <div class="urgency">
-                Llama ahora, tu agente está esperando con información importante sobre tu beneficio.
+                <p class="result-text">
+  Llama ahora, tu agente está esperando con información importante sobre tu beneficio.
+</p>
+
+<div id="countdown" style="
+  margin-top:10px;
+  font-size:18px;
+  font-weight:700;
+  color:#c0392b;
+">
+  ⏳ Tiempo restante: <span id="timer">02:00</span>
+</div>
+
+<script>
+  let time = 120; // 2 minutos en segundos
+
+  function updateTimer() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    document.getElementById("timer").innerHTML =
+      String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
+
+    if (time > 0) {
+      time--;
+      setTimeout(updateTimer, 1000);
+    } else {
+      document.getElementById("timer").innerHTML = "00:00";
+    }
+  }
+
+  updateTimer();
+</script>
               </div>
             </div>
           </section>
