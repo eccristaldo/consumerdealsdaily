@@ -405,72 +405,50 @@
             <div class="result-box">
               <div class="step-label">Paso 3 de 3</div>
               <h2 class="result-title">¡FELICIDADES! CALIFICAS PARA ACCEDER A ESTE BENEFICIO DE FINAL EXPENSE.</h2>
-              <p class="result-text">
-  Para asegurarlo, primero confirma que estás listo para hablar con un agente. La llamada toma solo unos minutos y podría ayudarte a verificar tu beneficio hoy.
+             <p class="result-text">
+  Para asegurarlo, solo debes llamar ahora al número que aparece abajo y hablar con un agente que puede darte información importante sobre tu beneficio.
 </p>
 
-<div id="precall-step" style="margin-top: 16px;">
-  <p style="font-weight: 600; margin-bottom: 12px;">
-    ¿Estás listo para llamar ahora?
-  </p>
-
-  <button
-    type="button"
-    onclick="document.getElementById('precall-step').style.display='none'; document.getElementById('call-container').style.display='block';"
-    style="
-      width: 100%;
-      max-width: 420px;
-      background: linear-gradient(135deg, #159a8c 0%, #2ecc71 100%);
-      color: #fff;
-      border: none;
-      border-radius: 18px;
-      padding: 18px 24px;
-      font-size: 22px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    "
-  >
-    Sí, quiero continuar
-  </button>
-</div>
-
-<div id="call-container" style="display: none; margin-top: 16px;">
-  <a class="call-btn" href="tel:+18557301864">📞 LLAMAR AHORA (855) 730-1864</a>
-</div>
-              <div class="urgency">
-                <p class="result-text">
-  Llama ahora, tu agente está esperando con información importante sobre tu beneficio.
-</p>
-
-<div id="countdown" style="
-  margin-top:10px;
-  font-size:18px;
-  font-weight:700;
-  color:#c0392b;
-">
+<div class="urgency">
   ⏳ Tiempo restante: <span id="timer">02:00</span>
 </div>
 
-<script>
-  let time = 120; // 2 minutos en segundos
+<a class="call-btn" href="tel:+18557301864">
+  📞 LLAMAR AHORA (855) 730-1864
+</a>
 
-  function updateTimer() {
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-
-    document.getElementById("timer").innerHTML =
-      String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
-
-    if (time > 0) {
-      time--;
-      setTimeout(updateTimer, 1000);
-    } else {
-      document.getElementById("timer").innerHTML = "00:00";
-    }
+<style>
+  .urgency {
+    margin: 12px 0 16px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #b06a00;
+    text-align: center;
   }
+</style>
 
-  updateTimer();
+<script>
+  (function () {
+    let time = 120; // 2 minutos
+    const timerEl = document.getElementById("timer");
+    if (!timerEl) return;
+
+    function updateTimer() {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+
+      timerEl.textContent =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+
+      if (time > 0) {
+        time--;
+        setTimeout(updateTimer, 1000);
+      }
+    }
+
+    updateTimer();
+  })();
 </script>
               </div>
             </div>
