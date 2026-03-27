@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4VTJJM4');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Final Expense</title>
+
+  <style>
+    :root {
+      --blue: #1f5f8b;
+      --blue-soft: #eaf4fb;
+      --green: #2d8f6f;
+      --green-dark: #1f7459;
+      --warm: #fff8ef;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --border: rgba(31, 95, 139, 0.14);
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, var(--blue-soft) 0%, var(--warm) 100%);
+      color: var(--text);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .top-bar {
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+    }
+
+    .content {
+      padding: 34px 28px 30px;
+      text-align: center;
+    }
+
+    .trust-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #f4fbf8;
+      color: var(--green-dark);
+      border: 1px solid rgba(45, 143, 111, 0.16);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 auto 18px auto;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+      margin: 0 0 14px;
+      color: #163d5a;
+      text-align: center;
+    }
+
+    .subheadline {
+      margin: 0 auto 26px;
+      font-size: clamp(17px, 2.3vw, 20px);
+      line-height: 1.5;
+      color: var(--muted);
+      text-align: center;
+      max-width: 640px;
+    }
+
+    .panel-wrap {
+      position: relative;
+      min-height: 340px;
+    }
+
+    .step {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateX(26px) scale(.985);
+      pointer-events: none;
+      transition: opacity .45s ease, transform .45s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .step.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .question-box,
+    .result-box {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border: 1px solid rgba(31, 95, 139, 0.1);
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .step-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .question {
+      font-size: clamp(26px, 3vw, 34px);
+      line-height: 1.2;
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 26px;
+      color: #153a57;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .option-btn,
+    .call-btn {
+      appearance: none;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      text-decoration: none;
+    }
+
+    .option-btn {
+      background: linear-gradient(90deg,#0f766e,#22c55e);
+      color: white;
+      padding: 18px 16px;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .option-btn:hover,
+    .call-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .option-btn:active,
+    .call-btn:active {
+      transform: translateY(0);
+    }
+
+    .result-title {
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.1;
+      text-align: center;
+      margin: 0 0 16px;
+      color: #16614b;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .result-text {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text);
+      text-align: center;
+      margin: 0 0 18px;
+    }
+
+    .call-btn {
+      width: 100%;
+      padding: 22px 24px;
+      background: linear-gradient(90deg,#0f766e,#22c55e);
+      color: white;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.20);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: .02em;
+      line-height: 1.15;
+      margin: 6px 0 16px 0;
+      text-align: center;
+    }
+
+    .urgency-text {
+      font-size: 17px;
+      line-height: 1.55;
+      color: #1f2937;
+      text-align: center;
+      margin: 0 0 18px;
+    }
+
+    .urgency-box {
+      margin: 0;
+      background: #fff7ea;
+      border: 1px solid rgba(210, 136, 46, 0.18);
+      color: #8a5a12;
+      padding: 16px 18px;
+      border-radius: 16px;
+      text-align: center;
+      font-size: 20px;
+      line-height: 1.4;
+      font-weight: 800;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+        display: block;
+      }
+
+      .wrapper {
+        max-width: 100%;
+      }
+
+      .content {
+        padding: 20px 14px 18px;
+      }
+
+      .trust-row {
+        font-size: 12px;
+        line-height: 1.35;
+        padding: 10px 12px;
+        margin-bottom: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+        line-height: 1.12;
+        margin-bottom: 12px;
+      }
+
+      .subheadline {
+        font-size: 16px;
+        line-height: 1.45;
+        margin-bottom: 18px;
+      }
+
+      .question-box,
+      .result-box {
+        padding: 20px 14px;
+        border-radius: 18px;
+      }
+
+      .question {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .result-title {
+        font-size: 26px;
+        line-height: 1.08;
+        margin-bottom: 14px;
+      }
+
+      .result-text {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      .urgency-text {
+        font-size: 16px;
+        line-height: 1.45;
+        margin-bottom: 16px;
+      }
+
+      .call-btn {
+        font-size: 17px;
+        line-height: 1.2;
+        padding: 18px 14px;
+        min-height: 60px;
+        border-radius: 14px;
+        margin: 4px 0 14px 0;
+        letter-spacing: 0;
+      }
+
+      .urgency-box {
+        font-size: 18px;
+        padding: 14px 12px;
+        border-radius: 14px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .option-btn {
+        min-height: 56px;
+        font-size: 18px;
+      }
+
+      .panel-wrap {
+        min-height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4VTJJM4"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div class="wrapper">
+    <div class="card">
+      <div class="top-bar"></div>
+
+      <div class="content">
+        <div class="trust-row">Información rápida · Proceso breve · Atención en español</div>
+
+        <div id="intro-header">
+          <h1>Miles de adultos mayores en EE.UU. están reclamando hasta $25,000 para gastos finales — revisa si tú también calificas</h1>
+          <p class="subheadline">Responde 2 preguntas y descubre si puedes recibir este beneficio.</p>
+        </div>
+
+        <div class="panel-wrap">
+          <section class="step active" id="step-1">
+            <div class="question-box">
+              <div class="step-label">Paso 1 de 3</div>
+              <h2 class="question">¿Tienes más de 50 años?</h2>
+              <div class="options">
+                <button class="option-btn" data-next="2">Sí</button>
+                <button class="option-btn" data-next="2">No</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="step" id="step-2">
+            <div class="question-box">
+              <div class="step-label">Paso 2 de 3</div>
+              <h2 class="question">¿Vives en los Estados Unidos?</h2>
+              <div class="options">
+                <button class="option-btn" data-next="3">Sí</button>
+                <button class="option-btn" data-next="3">No</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="step" id="step-3">
+            <div class="result-box">
+              <div class="step-label">Paso 3 de 3</div>
+
+              <h2 class="result-title">¡FELICIDADES! PODRÍAS RECIBIR HASTA $25,000 PARA CUBRIR GASTOS FINALES</h2>
+
+              <p class="result-text">
+                Haz una breve llamada para confirmar tu monto exacto en menos de 2 minutos.
+              </p>
+
+              <a class="call-btn" href="tel:+18777600183">
+                📞 LLAMAR AHORA (877) 760-0183
+              </a>
+
+              <p class="urgency-text">
+                Debido a la alta demanda, debes llamar ahora para asegurar tu acceso.
+                <b>Si no llamas, podrías perder tu lugar.</b>
+              </p>
+
+              <div class="urgency-box">
+                ⏳ Tiempo restante: <span id="timer">02:00</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+
+    function goToStep(stepNumber) {
+      const introHeader = document.getElementById('intro-header');
+
+      if (stepNumber >= 2) {
+        introHeader.style.display = 'none';
+      } else {
+        introHeader.style.display = 'block';
+      }
+
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === stepNumber - 1);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.option-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const next = Number(button.dataset.next);
+        goToStep(next);
+      });
+    });
+
+    (function () {
+      let time = 120;
+      const timerEl = document.getElementById("timer");
+      if (!timerEl) return;
+
+      function updateTimer() {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+
+        timerEl.textContent =
+          String(minutes).padStart(2, "0") + ":" +
+          String(seconds).padStart(2, "0");
+
+        if (time > 0) {
+          time--;
+          setTimeout(updateTimer, 1000);
+        }
+      }
+
+      updateTimer();
+    })();
+  </script>
+</body>
+</html>
