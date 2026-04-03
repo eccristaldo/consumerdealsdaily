@@ -359,7 +359,9 @@
         <div class="trust-row">Información rápida · Proceso breve · Atención en español</div>
 
         <div id="intro-header">
-          <h1>Miles de adultos mayores en Florida están reclamando hasta $25,000 para gastos finales — revisa si tú también calificas</h1>
+          <h1>
+  Miles de adultos mayores en <span id="state-name">tu estado</span> están reclamando hasta $25,000 para gastos finales — revisa si tú también calificas
+</h1>
           <p class="subheadline">Responde 2 preguntas y descubre si puedes recibir este beneficio.</p>
         </div>
 
@@ -463,5 +465,28 @@
       updateTimer();
     })();
   </script>
+  <script>
+async function detectUserState() {
+  const stateEl = document.getElementById("state-name");
+  if (!stateEl) return;
+
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
+
+    if (data && data.country_code === "US" && data.region) {
+      stateEl.textContent = data.region;
+    } else {
+      stateEl.textContent = "tu estado";
+    }
+  } catch (error) {
+    stateEl.textContent = "tu estado";
+    console.log("Error detectando estado:", error);
+  }
+}
+
+detectUserState();
+</script>
+  
 </body>
 </html>
