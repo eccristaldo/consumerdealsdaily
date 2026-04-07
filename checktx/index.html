@@ -359,7 +359,9 @@
         <div class="trust-row">Información rápida · Proceso breve · Atención en español</div>
 
         <div id="intro-header">
-          <h1>Miles de adultos mayores en Texas están reclamando hasta $25,000 para gastos finales — revisa si tú también calificas</h1>
+          <h1>
+  Miles de adultos mayores en <span id="state-name">tu estado</span> están reclamando hasta $25,000 para gastos finales — revisa si tú también calificas
+</h1>
           <p class="subheadline">Responde 2 preguntas y descubre si puedes recibir este beneficio.</p>
         </div>
 
@@ -396,8 +398,8 @@
                 Haz una breve llamada para confirmar tu monto exacto en menos de 2 minutos.
               </p>
 
-              <a class="call-btn" href="tel:+18669201481">
-                📞 LLAMAR AHORA (866) 920-1481
+              <a class="call-btn" href="tel:+18663370116">
+                📞 LLAMAR AHORA (866) 337-0116
               </a>
 
               <p class="urgency-text">
@@ -463,5 +465,28 @@
       updateTimer();
     })();
   </script>
+  <script>
+async function detectUserState() {
+  const stateEl = document.getElementById("state-name");
+  if (!stateEl) return;
+
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
+
+    if (data && data.country_code === "US" && data.region) {
+      stateEl.textContent = data.region;
+    } else {
+      stateEl.textContent = "tu estado";
+    }
+  } catch (error) {
+    stateEl.textContent = "tu estado";
+    console.log("Error detectando estado:", error);
+  }
+}
+
+detectUserState();
+</script>
+  
 </body>
 </html>
