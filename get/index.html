@@ -249,7 +249,54 @@
       line-height: 1.4;
       font-weight: 800;
     }
+.free-note {
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--green-dark);
+  text-align: center;
+  margin: 0 0 20px;
+  font-weight: 700;
+}
 
+.dial-instruction {
+  background: #eaf4fb;
+  border: 1px solid rgba(31, 95, 139, 0.18);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+.dial-instruction-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #163d5a;
+  margin: 0 0 6px;
+}
+
+.dial-instruction-text {
+  font-size: 15px;
+  line-height: 1.45;
+  color: #1f2937;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .free-note {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .dial-instruction {
+    padding: 12px 12px;
+    margin-bottom: 14px;
+  }
+  .dial-instruction-title {
+    font-size: 14px;
+  }
+  .dial-instruction-text {
+    font-size: 14px;
+  }
+}
     @media (max-width: 640px) {
       body {
         padding: 12px;
@@ -386,30 +433,42 @@
             </div>
           </section>
 
-          <section class="step" id="step-3">
-            <div class="result-box">
-              <div class="step-label">Paso 3 de 3</div>
+         <section class="step" id="step-3">
+  <div class="result-box">
+    <div class="step-label">Paso 3 de 3</div>
 
-              <h2 class="result-title">¡FELICIDADES! PODRÍAS RECIBIR HASTA $25,000 PARA CUBRIR GASTOS FINALES</h2>
+    <h2 class="result-title">¡FELICIDADES! PODRÍAS RECIBIR HASTA $25,000 PARA CUBRIR GASTOS FINALES</h2>
 
-              <p class="result-text">
-                Haz una breve llamada para confirmar tu monto exacto en menos de 2 minutos.
-              </p>
+    <p class="result-text">
+      Un especialista en español te confirmará tu monto exacto en <b>menos de 2 minutos</b>. Sin compromiso.
+    </p>
 
-              <a class="call-btn" href="tel:+18777600183">
-                📞 LLAMAR AHORA (877) 760-0183
-              </a>
+    <a class="call-btn" href="tel:+18777600183">
+      📞 LLAMAR GRATIS (877) 760-0183
+    </a>
 
-              <p class="urgency-text">
-                Debido a la alta demanda, debes llamar ahora para asegurar tu acceso.
-                <b>Si no llamas, podrías perder tu lugar.</b>
-              </p>
+    <p class="free-note">
+      ✅ Llamada <b>100% GRATIS</b> desde cualquier teléfono en EE.UU.
+    </p>
 
-              <div class="urgency-box">
-                ⏳ Tiempo restante: <span id="timer">02:00</span>
-              </div>
-            </div>
-          </section>
+    <div class="dial-instruction">
+      <p class="dial-instruction-title">👆 Después de tocar el botón:</p>
+      <p class="dial-instruction-text">
+        Tu teléfono abrirá el marcador con el número ya cargado.<br>
+        <b>Solo presiona el botón verde 📞 para iniciar tu llamada.</b>
+      </p>
+    </div>
+
+    <p class="urgency-text">
+      Debido a la alta demanda, debes llamar ahora para asegurar tu acceso.
+      <b>Si no llamas, podrías perder tu lugar.</b>
+    </p>
+
+    <div class="urgency-box">
+      ⏳ Tiempo restante: <span id="timer">02:00</span>
+    </div>
+  </div>
+</section>
         </div>
       </div>
     </div>
