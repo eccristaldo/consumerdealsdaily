@@ -10,9 +10,6 @@
   })(window,document,'script','dataLayer','GTM-W4VTJJM4');
   </script>
   <!-- End Google Tag Manager -->
-
-  <script src=//b-js.ringba.com/CAc55ef76f78e6495c85f1660584a317d0 async></script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz Final Expense</title>
@@ -673,171 +670,91 @@
     </div>
   </div>
 
-  <script>
-    const steps = document.querySelectorAll('.step');
-    const stepMap = {
-      '1': 'step-1',
-      '2': 'step-2',
-      'loading': 'step-loading',
-      '3': 'step-3'
-    };
+<script>
+  const steps = document.querySelectorAll('.step');
+  const stepMap = {
+    '1': 'step-1',
+    '2': 'step-2',
+    'loading': 'step-loading',
+    '3': 'step-3'
+  };
 
-    function goToStep(stepKey) {
-      const introHeader = document.getElementById('intro-header');
-      const targetId = stepMap[stepKey];
+  // 👉 Ringba loader
+  let ringbaLoaded = false;
 
-      // Hide intro header after step 1
-      if (stepKey !== '1') {
-        introHeader.style.display = 'none';
-      } else {
-        introHeader.style.display = 'block';
-      }
+  function loadRingbaScript() {
+    if (ringbaLoaded) return;
+    ringbaLoaded = true;
 
-      steps.forEach(step => {
-        step.classList.toggle('active', step.id === targetId);
-      });
+    const script = document.createElement('script');
+    script.src = '//b-js.ringba.com/CAc55ef76f78e6495c85f1660584a317d0';
+    script.async = true;
+    document.head.appendChild(script);
+  }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  function goToStep(stepKey) {
+    const introHeader = document.getElementById('intro-header');
+    const targetId = stepMap[stepKey];
 
-      // If we just entered the loading step, run the loading sequence
-      if (stepKey === 'loading') {
-        runLoadingSequence();
-      }
+    // 👉 AQUÍ se carga Ringba SOLO en el paso final
+    if (stepKey === '3') {
+      loadRingbaScript();
     }
 
-    document.querySelectorAll('.option-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const next = button.dataset.next;
-        goToStep(next);
-      });
+    // Hide intro header after step 1
+    if (stepKey !== '1') {
+      introHeader.style.display = 'none';
+    } else {
+      introHeader.style.display = 'block';
+    }
+
+    steps.forEach(step => {
+      step.classList.toggle('active', step.id === targetId);
     });
 
-    function runLoadingSequence() {
-      const items = [
-        document.getElementById('load-1'),
-        document.getElementById('load-2'),
-        document.getElementById('load-3')
-      ];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Reset all
-      items.forEach(item => {
-        item.classList.remove('processing', 'done');
-      });
+    if (stepKey === 'loading') {
+      runLoadingSequence();
+    }
+  }
 
-      // Sequence: each item processes for ~1.4s then marks as done
-      const stepDuration = 1400;
+  document.querySelectorAll('.option-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const next = button.dataset.next;
+      goToStep(next);
+    });
+  });
 
-      items.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add('processing');
-        }, index * stepDuration);
+  function runLoadingSequence() {
+    const items = [
+      document.getElementById('load-1'),
+      document.getElementById('load-2'),
+      document.getElementById('load-3')
+    ];
 
-        setTimeout(() => {
-          item.classList.remove('processing');
-          item.classList.add('done');
-        }, (index + 1) * stepDuration);
-      });
+    items.forEach(item => {
+      item.classList.remove('processing', 'done');
+    });
 
-      // After all 3 items are done, advance to result
-      const totalDuration = items.length * stepDuration + 600;
+    const stepDuration = 1400;
+
+    items.forEach((item, index) => {
       setTimeout(() => {
-        goToStep('3');
-      }, totalDuration);
-    }
+        item.classList.add('processing');
+      }, index * stepDuration);
 
-    /* ===== GEO DETECTION: muestra el estado del usuario en el headline ===== */
-    const STATE_TRANSLATIONS = {
-      "Alabama": "Alabama",
-      "Alaska": "Alaska",
-      "Arizona": "Arizona",
-      "Arkansas": "Arkansas",
-      "California": "California",
-      "Colorado": "Colorado",
-      "Connecticut": "Connecticut",
-      "Delaware": "Delaware",
-      "Florida": "Florida",
-      "Georgia": "Georgia",
-      "Hawaii": "Hawái",
-      "Idaho": "Idaho",
-      "Illinois": "Illinois",
-      "Indiana": "Indiana",
-      "Iowa": "Iowa",
-      "Kansas": "Kansas",
-      "Kentucky": "Kentucky",
-      "Louisiana": "Luisiana",
-      "Maine": "Maine",
-      "Maryland": "Maryland",
-      "Massachusetts": "Massachusetts",
-      "Michigan": "Míchigan",
-      "Minnesota": "Minnesota",
-      "Mississippi": "Misisipi",
-      "Missouri": "Misuri",
-      "Montana": "Montana",
-      "Nebraska": "Nebraska",
-      "Nevada": "Nevada",
-      "New Hampshire": "Nuevo Hampshire",
-      "New Jersey": "Nueva Jersey",
-      "New Mexico": "Nuevo México",
-      "New York": "Nueva York",
-      "North Carolina": "Carolina del Norte",
-      "North Dakota": "Dakota del Norte",
-      "Ohio": "Ohio",
-      "Oklahoma": "Oklahoma",
-      "Oregon": "Oregón",
-      "Pennsylvania": "Pensilvania",
-      "Rhode Island": "Rhode Island",
-      "South Carolina": "Carolina del Sur",
-      "South Dakota": "Dakota del Sur",
-      "Tennessee": "Tennessee",
-      "Texas": "Texas",
-      "Utah": "Utah",
-      "Vermont": "Vermont",
-      "Virginia": "Virginia",
-      "Washington": "Washington",
-      "West Virginia": "Virginia Occidental",
-      "Wisconsin": "Wisconsin",
-      "Wyoming": "Wyoming",
-      "District of Columbia": "Washington D.C."
-    };
+      setTimeout(() => {
+        item.classList.remove('processing');
+        item.classList.add('done');
+      }, (index + 1) * stepDuration);
+    });
 
-    async function detectUserState() {
-      const stateEl = document.getElementById("state-name");
-      if (!stateEl) return;
-
-      // 1. Si ya lo detectamos en esta sesión, usa el cache
-      try {
-        const cached = sessionStorage.getItem("userState");
-        if (cached) {
-          stateEl.textContent = cached;
-          return;
-        }
-      } catch (e) {
-        // sessionStorage puede fallar en modo privado, seguimos sin cache
-      }
-
-      // 2. Detectar vía API
-      try {
-        const res = await fetch("https://ipwho.is/");
-        const data = await res.json();
-
-        if (data && data.success && data.country_code === "US" && data.region) {
-          const translated = STATE_TRANSLATIONS[data.region] || data.region;
-          stateEl.textContent = translated;
-
-          // Guardar en cache para no volver a llamar la API
-          try {
-            sessionStorage.setItem("userState", translated);
-          } catch (e) {}
-        } else {
-          stateEl.textContent = "EE.UU.";
-        }
-      } catch (error) {
-        stateEl.textContent = "EE.UU.";
-        console.log("Error detectando estado:", error);
-      }
-    }
-
-    detectUserState();
-  </script>
+    const totalDuration = items.length * stepDuration + 600;
+    setTimeout(() => {
+      goToStep('3');
+    }, totalDuration);
+  }
+</script>
 </body>
 </html>
