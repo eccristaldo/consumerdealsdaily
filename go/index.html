@@ -693,11 +693,6 @@ function goToStep(stepKey) {
     const introHeader = document.getElementById('intro-header');
     const targetId = stepMap[stepKey];
 
-    // ClickFlare se carga SOLO cuando aparece el CTA final
-    if (stepKey === '3') {
-      loadClickFlareScript();
-    }
-
     // Hide intro header after step 1
     if (stepKey !== '1') {
       introHeader.style.display = 'none';
@@ -710,6 +705,17 @@ function goToStep(stepKey) {
     });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Mostrar primero el CTA. ClickFlare se carga después y nunca bloquea la transición.
+    if (stepKey === '3') {
+      setTimeout(() => {
+        try {
+          loadClickFlareScript();
+        } catch (error) {
+          console.error('ClickFlare no pudo cargarse:', error);
+        }
+      }, 0);
+    }
 
     if (stepKey === 'loading') {
       runLoadingSequence();
