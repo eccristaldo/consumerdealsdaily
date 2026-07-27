@@ -587,8 +587,8 @@
               <div class="step-label">Paso 2 de 3</div>
               <h2 class="question">¿Vives en los Estados Unidos?</h2>
               <div class="options">
-                <button class="option-btn ringba-trigger" data-next="loading">Sí</button>
-                <button class="option-btn ringba-trigger" data-next="loading">No</button>
+                <button id="ringba-q2-yes" class="option-btn ringba-trigger" data-next="loading">Sí</button>
+                <button id="ringba-q2-no" class="option-btn ringba-trigger" data-next="loading">No</button>
               </div>
             </div>
           </section>
@@ -669,6 +669,55 @@
       </div>
     </div>
   </div>
+
+
+<script>
+  // Auditor de Ringba: no inyecta nada; solo registra cuándo aparece el script.
+  window.ringbaInjectionAudit = {
+    pageLoadedAt: new Date().toISOString(),
+    question2ClickedAt: null,
+    ringbaInjectedAt: null,
+    ringbaScriptUrl: null
+  };
+
+  function findRingbaScript() {
+    return [...document.scripts].find(script =>
+      script.src && script.src.includes('b-js.ringba.com')
+    ) || null;
+  }
+
+  function recordRingbaInjection(script) {
+    if (!script || window.ringbaInjectionAudit.ringbaInjectedAt) return;
+    window.ringbaInjectionAudit.ringbaInjectedAt = new Date().toISOString();
+    window.ringbaInjectionAudit.ringbaScriptUrl = script.src;
+    console.log('[AUDIT] Ringba fue inyectado:', window.ringbaInjectionAudit);
+  }
+
+  const ringbaAlreadyPresent = findRingbaScript();
+  if (ringbaAlreadyPresent) {
+    recordRingbaInjection(ringbaAlreadyPresent);
+    console.warn('[AUDIT] Ringba ya estaba presente al cargar la página.');
+  } else {
+    console.log('[AUDIT] Ringba NO está presente al cargar la página.');
+  }
+
+  const ringbaObserver = new MutationObserver(() => {
+    const script = findRingbaScript();
+    if (script) {
+      recordRingbaInjection(script);
+      ringbaObserver.disconnect();
+    }
+  });
+
+  ringbaObserver.observe(document.documentElement, { childList: true, subtree: true });
+
+  document.addEventListener('click', event => {
+    const button = event.target.closest('#ringba-q2-yes, #ringba-q2-no');
+    if (!button) return;
+    window.ringbaInjectionAudit.question2ClickedAt = new Date().toISOString();
+    console.log('[AUDIT] Clic en pregunta 2:', button.id, window.ringbaInjectionAudit);
+  }, true);
+</script>
 
 <script>
   const steps = document.querySelectorAll('.step');
