@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beneficio de Gastos Finales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --teal-deep:#0a4c40;
+      --teal:#0f6e5c;
+      --teal-bright:#17a884;
+      --gold:#f2b705;
+      --coral:#ff6b5c;
+      --ink:#152420;
+      --muted:#5c6b64;
+      --cream:#fff9ef;
+      --line:rgba(15,110,92,0.14);
+      --shadow: 0 18px 44px -14px rgba(10,60,50,0.30);
+      --display:'Baloo 2',sans-serif;
+      --body:'Inter',sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;font-family:var(--body);color:var(--ink);}
+
+    /* ===== COLORFUL DECORATIVE BACKGROUND (like the solar lander) ===== */
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 8% -4%, rgba(15,110,92,0.22), transparent 42%),
+        radial-gradient(circle at 100% 6%, rgba(242,183,5,0.20), transparent 40%),
+        radial-gradient(circle at 92% 96%, rgba(255,107,92,0.18), transparent 46%),
+        radial-gradient(circle at 4% 98%, rgba(23,168,132,0.16), transparent 42%),
+        var(--cream);
+      display:flex; flex-direction:column; align-items:center;
+      overflow-x:hidden; -webkit-font-smoothing:antialiased;
+    }
+
+    /* ===== TOPBAR: slim, sticky, dot-step only ===== */
+    .topbar{position:sticky; top:0; z-index:10; width:100%; background:rgba(255,249,239,0.85); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+    .topbar-inner{max-width:480px; margin:0 auto; display:flex; align-items:center; justify-content:center; padding:12px 16px;}
+    .dot-steps{display:flex; gap:8px;}
+    .dot-steps span{width:8px; height:8px; border-radius:50%; background:#d8e8e2; transition:background .3s ease, transform .3s ease;}
+    .dot-steps span.active{background:var(--teal); transform:scale(1.3);}
+    .dot-steps span.done{background:var(--teal-bright);}
+
+    /* ===== PAGE WRAP + FLOATING CARD ===== */
+    .page-wrap{width:100%; max-width:480px; margin:0 auto; padding:18px 16px 28px;}
+    .stage-card{
+      background:#ffffff; border-radius:26px; box-shadow:var(--shadow); border:1px solid rgba(15,110,92,0.08);
+      width:100%; padding:26px 22px 24px; display:flex; flex-direction:column; position:relative; overflow:hidden;
+    }
+    .stage-card::before{
+      content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%;
+      background: radial-gradient(circle, rgba(242,183,5,0.16), transparent 70%); pointer-events:none;
+    }
+
+    .panel{display:none; flex-direction:column; position:relative; z-index:1;}
+    .panel.active{display:flex;}
+
+    /* ---- HERO (step 1 only) ---- */
+    .hero-badge{font-size:12.5px; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; text-align:center; margin:2px 0 10px;}
+    h1{font-family:var(--display); font-weight:800; font-size:clamp(24px,6.6vw,31px); line-height:1.16; text-align:center; margin:0 0 10px; color:var(--teal-deep);}
+    h1 .hl{color:var(--coral);}
+    .subhead{font-size:15px; line-height:1.5; color:var(--muted); text-align:center; margin:0 0 20px;}
+
+    /* ---- QUESTION ---- */
+    .q-label{font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--teal); text-align:center; margin-bottom:8px;}
+    .question{font-family:var(--display); font-weight:800; font-size:clamp(21px,6vw,26px); line-height:1.22; text-align:center; color:var(--teal-deep); margin:0 0 24px;}
+    .tap-grid{display:flex; flex-direction:column; gap:12px; margin-top:4px;}
+    .tap-btn{
+      appearance:none; border:2px solid var(--line); background:#fbfefd; border-radius:16px;
+      padding:17px 18px; font-family:var(--body); font-weight:700; font-size:16.5px; color:var(--teal-deep);
+      display:flex; align-items:center; justify-content:center; gap:10px; cursor:pointer;
+      transition: all .18s ease;
+    }
+    .tap-btn:hover{ border-color:var(--teal-bright); background:#f2faf7; transform:translateY(-1px);}
+    .tap-btn:active{ transform:translateY(0);}
+    .tap-btn .badge-ic{
+      width:28px; height:28px; border-radius:50%; background:linear-gradient(160deg,var(--teal-bright),var(--teal));
+      color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;
+    }
+
+    /* ---- LOADING ---- */
+    .loading-panel{align-items:center; justify-content:center; text-align:center;}
+    .loading-title{font-family:var(--display); font-weight:800; font-size:21px; color:var(--teal-deep); margin:0 0 4px;}
+    .loading-sub{font-size:14px; color:var(--muted); margin:0 0 20px;}
+    .ring-wrap{position:relative; width:112px; height:112px; margin:0 auto 20px;}
+    .ring-wrap svg{transform:rotate(-90deg);}
+    .ring-bg{fill:none; stroke:#e3f3ec; stroke-width:9;}
+    .ring-fg{fill:none; stroke:url(#ringGrad); stroke-width:9; stroke-linecap:round; stroke-dasharray:314; stroke-dashoffset:314; transition:stroke-dashoffset .25s linear;}
+    .ring-pct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; font-size:23px; color:var(--teal-deep);}
+    .load-list{list-style:none; padding:0; margin:0 auto; max-width:360px; text-align:left; width:100%;}
+    .load-item{display:flex; align-items:center; gap:12px; padding:10px 13px; margin-bottom:8px; background:#f2faf7; border:1px solid var(--line); border-radius:12px; font-size:13.5px; font-weight:600; color:var(--muted); opacity:.45; transition:all .4s ease;}
+    .load-item.processing{opacity:1; background:#fff8e6; border-color:rgba(242,183,5,.4); color:var(--teal-deep);}
+    .load-item.done{opacity:1; background:#e9f8f0; border-color:rgba(23,168,132,.35); color:var(--teal-deep);}
+    .load-ic{flex-shrink:0; width:20px; height:20px; display:flex; align-items:center; justify-content:center;}
+    .load-item .spinner{display:none; width:16px; height:16px; border:3px solid rgba(242,183,5,.3); border-top-color:var(--gold); border-radius:50%; animation:spin .8s linear infinite;}
+    .load-item .check{display:none; width:20px; height:20px; background:var(--teal-bright); border-radius:50%; color:#fff; font-size:12px; font-weight:900; align-items:center; justify-content:center;}
+    .load-item .dot{display:flex; width:16px; height:16px; border:2px solid rgba(92,107,100,.4); border-radius:50%;}
+    .load-item.processing .spinner{display:block;}
+    .load-item.processing .check,.load-item.processing .dot{display:none;}
+    .load-item.done .check{display:flex;}
+    .load-item.done .spinner,.load-item.done .dot{display:none;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* ---- RESULT ---- */
+    .confetti-layer{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:20;}
+    .confetti-piece{position:absolute; top:-20px; border-radius:1px; opacity:.95; animation:confettiFall linear forwards;}
+    @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg); opacity:1;}100%{transform:translateY(105vh) rotate(540deg); opacity:.2;}}
+
+    .result-panel{align-items:center; justify-content:flex-start; text-align:center;}
+    .result-badge{display:inline-flex; align-items:center; gap:7px; background:linear-gradient(90deg,var(--teal),var(--teal-bright)); color:#fff; padding:8px 16px; border-radius:999px; font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; margin-bottom:12px; animation:badgeBounce .6s ease;}
+    @keyframes badgeBounce{0%{transform:scale(.6);opacity:0;}60%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;}}
+
+    .amount-wrap{position:relative; margin:2px auto 6px; width:fit-content;}
+    .amount-glow{font-family:var(--display); font-weight:800; font-size:clamp(38px,12vw,50px); color:var(--teal-deep); line-height:1; text-shadow:0 0 22px rgba(242,183,5,.55); animation:amtPulse 1.8s ease-in-out infinite;}
+    @keyframes amtPulse{0%,100%{text-shadow:0 0 16px rgba(242,183,5,.45);}50%{text-shadow:0 0 30px rgba(242,183,5,.85);}}
+    .sparkle{position:absolute; font-size:17px; animation:sparkleTwinkle 1.6s ease-in-out infinite;}
+    .sparkle.s1{top:-8px; left:-18px; animation-delay:0s;}
+    .sparkle.s2{top:-4px; right:-20px; animation-delay:.4s;}
+    .sparkle.s3{bottom:-6px; left:-12px; animation-delay:.8s;}
+    .sparkle.s4{bottom:-2px; right:-14px; animation-delay:1.2s;}
+    @keyframes sparkleTwinkle{0%,100%{opacity:.25;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+    .amount-label{font-size:12.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin:0 0 12px;}
+
+    .result-title{font-family:var(--display); font-weight:800; font-size:clamp(18px,5vw,21px); line-height:1.24; color:var(--teal-deep); margin:0 0 8px;}
+    .result-text{font-size:14px; line-height:1.5; color:var(--ink); margin:0 0 14px;}
+
+    .countdown-box{display:inline-flex; align-items:center; gap:8px; background:#fff4d6; border:1px solid rgba(242,183,5,.4); color:#8a5c00; padding:8px 15px; border-radius:14px; font-weight:800; font-size:13px; margin:0 0 14px;}
+    .countdown-num{font-family:var(--display); font-size:15px;}
+
+    .call-btn{position:relative; overflow:hidden; width:100%; border:none; border-radius:16px; padding:18px 20px;
+      background:linear-gradient(90deg,var(--coral),#ff8a6e); color:#fff; box-shadow:0 14px 30px rgba(255,107,92,.4);
+      display:flex; align-items:center; justify-content:center; gap:10px; font-weight:900; font-size:18px;
+      text-decoration:none; margin:0 0 10px;}
+    .call-btn::after{content:''; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent); animation:shineSweep 2.4s ease-in-out infinite;}
+    @keyframes shineSweep{0%{left:-60%;}60%{left:130%;}100%{left:130%;}}
+
+    .free-note{font-size:12.5px; font-weight:700; color:var(--teal-deep); margin:0 0 16px;}
+
+    .instructions-box{width:100%; background:#f2faf7; border:1px solid var(--line); border-radius:14px; padding:13px 15px; text-align:left; margin:0 0 14px;}
+    .instructions-title{font-size:12.5px; font-weight:800; color:var(--teal-deep); text-align:center; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em;}
+    .instructions-list{list-style:none; padding:0; margin:0; counter-reset:step-counter;}
+    .instructions-list li{counter-increment:step-counter; display:flex; align-items:flex-start; gap:10px; padding:5px 0; font-size:13px; line-height:1.4; color:var(--ink);}
+    .instructions-list li::before{content:counter(step-counter); flex-shrink:0; width:21px; height:21px; background:var(--teal); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:11.5px;}
+
+    .final-warning{font-size:11px; line-height:1.5; color:var(--muted); text-align:center; margin:14px 0 0; padding-top:12px; border-top:1px solid var(--line);}
+
+    @media (min-width:520px){ .page-wrap{padding-top:30px;} }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div class="confetti-layer" id="confettiLayer"></div>
+
+  <svg width="0" height="0">
+    <defs>
+      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0f6e5c"/>
+        <stop offset="100%" stop-color="#f2b705"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="dot-steps" id="dotSteps">
+        <span class="active" data-dot="1"></span>
+        <span data-dot="2"></span>
+        <span data-dot="3"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <div class="stage-card">
+
+      <!-- STEP 1: hero + question -->
+      <section class="panel active" id="panel-1">
+        <div class="hero-badge">🛡️ Programa vigente 2026 · Atención en español</div>
+        <h1>Podrías calificar para <span class="hl">hasta $25,000</span> en gastos finales</h1>
+        <p class="subhead">Responde 2 preguntas rápidas y descubre tu resultado en menos de 60 segundos.</p>
+
+        <div class="q-label">Pregunta 1 de 2</div>
+        <h2 class="question">¿Tienes 50 años o más?</h2>
+        <div class="tap-grid">
+          <button class="tap-btn" data-next="2"><span class="badge-ic">✓</span> Sí, tengo 50 o más</button>
+          <button class="tap-btn" data-next="2"><span class="badge-ic">✕</span> No</button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="panel" id="panel-2">
+        <div class="q-label">Pregunta 2 de 2</div>
+        <h2 class="question">¿Resides actualmente en Estados Unidos?</h2>
+        <div class="tap-grid">
+          <button class="tap-btn" data-next="loading"><span class="badge-ic">✓</span> Sí, vivo en EE.UU.</button>
+          <button class="tap-btn" data-next="loading"><span class="badge-ic">✕</span> No</button>
+        </div>
+      </section>
+
+      <!-- LOADING -->
+      <section class="panel loading-panel" id="panel-loading">
+        <h2 class="loading-title">Calculando tu resultado...</h2>
+        <p class="loading-sub">Esto toma solo unos segundos</p>
+        <div class="ring-wrap">
+          <svg width="112" height="112" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+            <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="ring-pct" id="ringPct">0%</div>
+        </div>
+        <ul class="load-list">
+          <li class="load-item" id="load-1">
+            <div class="load-ic"><div class="dot"></div><div class="spinner"></div><div class="check">✓</div></div>
+            <span>Confirmando elegibilidad del beneficio</span>
+          </li>
+          <li class="load-item" id="load-2">
+            <div class="load-ic"><div class="dot"></div><div class="spinner"></div><div class="check">✓</div></div>
+            <span>Verificando disponibilidad en tu zona</span>
+          </li>
+          <li class="load-item" id="load-3">
+            <div class="load-ic"><div class="dot"></div><div class="spinner"></div><div class="check">✓</div></div>
+            <span>Conectando con un especialista en español</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- RESULT -->
+      <section class="panel result-panel" id="panel-3">
+        <div class="result-badge">🎉 ¡Buenas noticias!</div>
+
+        <div class="amount-wrap">
+          <span class="sparkle s1">✨</span>
+          <span class="sparkle s2">✨</span>
+          <div class="amount-glow">$25,000</div>
+          <span class="sparkle s3">✨</span>
+          <span class="sparkle s4">✨</span>
+        </div>
+        <p class="amount-label">Beneficio estimado de gastos finales</p>
+
+        <h2 class="result-title">Un especialista en español está listo para confirmar tu elegibilidad</h2>
+        <p class="result-text">Habla con un especialista ahora mismo para revisar tu caso y los próximos pasos.</p>
+
+        <div class="countdown-box">⏰ Tu turno se reserva por <span class="countdown-num" id="countdown">10:00</span></div>
+
+        <a class="call-btn" id="call-btn" href="tel:+18777600183">
+          📞 LLAMAR AHORA (877) 760-0183
+        </a>
+
+        <p class="free-note">✅ Llamada sin costo desde cualquier teléfono en EE.UU.</p>
+
+        <div class="instructions-box">
+          <p class="instructions-title">Qué hacer ahora:</p>
+          <ol class="instructions-list">
+            <li>Toca el botón de arriba para abrir tu marcador.</li>
+            <li>Presiona el ícono verde de llamada en tu teléfono.</li>
+            <li>Habla con el especialista y confirma tu elegibilidad en pocos minutos.</li>
+          </ol>
+        </div>
+
+        <p class="final-warning">La disponibilidad de especialistas es limitada y puede variar según tu zona. Este no es un programa gubernamental.</p>
+      </section>
+
+    </div>
+  </div>
+
+<script>
+  const panels = document.querySelectorAll('.panel');
+  const panelMap = { '1':'panel-1', '2':'panel-2', 'loading':'panel-loading', '3':'panel-3' };
+  const dots = document.querySelectorAll('.dot-steps span');
+
+  // ===== RINGBA: se inyecta UNA sola vez, exactamente cuando se muestra el CTA final (step 3) =====
+  let ringbaLoaded = false;
+  function loadRingbaScript(){
+    if (ringbaLoaded) return;
+    ringbaLoaded = true;
+    const script = document.createElement('script');
+    script.src = '//b-js.ringba.com/CAc55ef76f78e6495c85f1660584a317d0'; // mismo pool que la lander de FE actual
+    script.async = true;
+    script.onload = function(){ console.log('[Ringba] pool script loaded OK'); };
+    script.onerror = function(){ console.error('[Ringba] pool script FAILED to load'); };
+    document.head.appendChild(script);
+  }
+
+  function updateDots(stepKey){
+    const map = { '1':1, '2':2, 'loading':3, '3':3 };
+    const active = map[stepKey] || 1;
+    dots.forEach((d,i)=>{
+      const n = i+1;
+      d.classList.toggle('done', n < active);
+      d.classList.toggle('active', n === active);
+    });
+  }
+
+  function goToStep(stepKey){
+    const targetId = panelMap[stepKey];
+    panels.forEach(p => p.classList.toggle('active', p.id === targetId));
+    updateDots(stepKey);
+    window.scrollTo({top:0, behavior:'smooth'});
+
+    if (stepKey === 'loading') runLoadingSequence();
+    if (stepKey === '3'){
+      loadRingbaScript();   // <- pool number swap happens only here, on CTA reveal
+      fireConfetti();
+      startCountdown(600);
+    }
+  }
+
+  document.querySelectorAll('.tap-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> goToStep(btn.dataset.next));
+  });
+
+  function runLoadingSequence(){
+    const items=[document.getElementById('load-1'),document.getElementById('load-2'),document.getElementById('load-3')];
+    items.forEach(i=>i.classList.remove('processing','done'));
+
+    const ringFg=document.getElementById('ringFg');
+    const ringPct=document.getElementById('ringPct');
+    const circumference=314;
+    ringFg.style.strokeDashoffset=circumference;
+
+    const stepDuration=1300;
+    const totalDuration=items.length*stepDuration+500;
+
+    items.forEach((item,index)=>{
+      setTimeout(()=>item.classList.add('processing'), index*stepDuration);
+      setTimeout(()=>{item.classList.remove('processing'); item.classList.add('done');}, (index+1)*stepDuration);
+    });
+
+    const startTime=Date.now();
+    const ringInterval=setInterval(()=>{
+      const elapsed=Date.now()-startTime;
+      const pct=Math.min(100, Math.round((elapsed/totalDuration)*100));
+      ringPct.textContent=pct+'%';
+      ringFg.style.strokeDashoffset=circumference-(circumference*pct/100);
+      if (pct>=100) clearInterval(ringInterval);
+    }, 60);
+
+    setTimeout(()=>goToStep('3'), totalDuration);
+  }
+
+  function fireConfetti(){
+    const layer=document.getElementById('confettiLayer');
+    const colors=['#0f6e5c','#17a884','#f2b705','#ff6b5c','#ffffff'];
+    const count=70;
+    for(let i=0;i<count;i++){
+      const piece=document.createElement('div');
+      piece.className='confetti-piece';
+      const size=6+Math.random()*7;
+      piece.style.width=size+'px';
+      piece.style.height=(size*0.4+4)+'px';
+      piece.style.left=Math.random()*100+'vw';
+      piece.style.background=colors[Math.floor(Math.random()*colors.length)];
+      piece.style.animationDuration=(2.4+Math.random()*1.8)+'s';
+      piece.style.animationDelay=(Math.random()*0.6)+'s';
+      layer.appendChild(piece);
+      setTimeout(()=>piece.remove(), 5000);
+    }
+  }
+
+  function startCountdown(seconds){
+    const el=document.getElementById('countdown');
+    let remaining=seconds;
+    function render(){
+      const m=String(Math.floor(remaining/60)).padStart(2,'0');
+      const s=String(remaining%60).padStart(2,'0');
+      el.textContent=`${m}:${s}`;
+    }
+    render();
+    const iv=setInterval(()=>{
+      remaining--;
+      if (remaining<0){ clearInterval(iv); return; }
+      render();
+    }, 1000);
+  }
+</script>
+</body>
+</html>
