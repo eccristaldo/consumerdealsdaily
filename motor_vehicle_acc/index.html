@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accident Claim Review</title>
+
+  <!-- Ringba pool script: loads immediately (no delayed injection) -->
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TenQWqnl7CX_CIi5z5XNwG5gRqMJ0zWkJzEAVuRIF6RY2B8a3-1FVjN2w4sWcLZaW3ASfIcD_F9B4N-wOVoPMgwQH85el-Eh7lkvCdYQzWLs0j4wmcyGbFnLxkQTJR_nBfyuwAwFvlcMzYxoCEqVAPUoVej0SljN35jMblIdNA7SffGshPLx3rYwqo39bIQAoN8JFPixIq6OYVzzULFaG9a7oPyx03W5MxElFzAR5DqGyX21c5ZhYjoCkUNF_G-5GP6tUUOLb2ryB29nmFAP_I7PgLzS_1TsZ8ZzPJ9TQLdZ00ZDphfGsbP1qJ9MokWm" charset="UTF-8"></script><script src="//b-js.ringba.com/CAd6c6c7e92725443180763700cb56ce11" async></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#17324d;
+      --navy-2:#244968;
+      --blue:#2e6f9e;
+      --bg:#f5f7fa;
+      --card:#ffffff;
+      --ink:#18222c;
+      --muted:#66727d;
+      --line:#d9e0e6;
+      --soft:#eef3f7;
+      --danger:#a33c3c;
+      --success:#2f6b4f;
+      --shadow:0 18px 50px rgba(20,40,60,.10);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .topbar{
+      width:100%;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      padding:14px 18px;
+    }
+    .topbar-inner{
+      max-width:620px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
+    .brand{
+      font-size:15px;
+      font-weight:800;
+      color:var(--navy);
+      letter-spacing:-.01em;
+    }
+    .step-text{
+      font-size:12px;
+      font-weight:600;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .wrap{
+      max-width:620px;
+      margin:0 auto;
+      padding:34px 18px 46px;
+    }
+
+    .intro{
+      text-align:center;
+      margin-bottom:22px;
+    }
+    .eyebrow{
+      display:inline-block;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--blue);
+      margin-bottom:10px;
+    }
+    h1{
+      font-size:clamp(28px,6vw,38px);
+      line-height:1.12;
+      letter-spacing:-.035em;
+      margin:0 0 12px;
+      color:var(--navy);
+    }
+    .intro p{
+      margin:0;
+      font-size:15px;
+      line-height:1.55;
+      color:var(--muted);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:28px 24px 24px;
+    }
+
+    .progress{
+      height:7px;
+      border-radius:999px;
+      background:var(--soft);
+      overflow:hidden;
+      margin-bottom:24px;
+    }
+    .progress-fill{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,var(--navy-2),var(--blue));
+      transition:width .25s ease;
+    }
+
+    .panel{display:none}
+    .panel.active{display:block}
+
+    .q-kicker{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--blue);
+      margin-bottom:8px;
+    }
+    .question{
+      font-size:23px;
+      line-height:1.3;
+      font-weight:800;
+      color:var(--navy);
+      margin:0 0 10px;
+    }
+    .helper{
+      font-size:13px;
+      line-height:1.5;
+      color:var(--muted);
+      margin:0 0 20px;
+    }
+
+    .options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .option,
+    select{
+      width:100%;
+      border:1.5px solid var(--line);
+      background:#fff;
+      border-radius:13px;
+      padding:16px 14px;
+      font-family:inherit;
+      font-size:15px;
+      font-weight:700;
+      color:var(--navy);
+    }
+    .option{
+      cursor:pointer;
+      transition:.15s ease;
+    }
+    .option:hover{
+      border-color:var(--blue);
+      background:#f8fbfd;
+    }
+    select{font-weight:600}
+
+    .continue-btn{
+      width:100%;
+      margin-top:16px;
+      border:0;
+      border-radius:13px;
+      padding:16px 18px;
+      font-family:inherit;
+      font-size:16px;
+      font-weight:800;
+      cursor:pointer;
+      color:#fff;
+      background:var(--navy);
+    }
+    .continue-btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .result{
+      text-align:center;
+      padding:6px 0 2px;
+    }
+    .result-icon{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      margin:0 auto 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      font-weight:800;
+    }
+    .result-icon.good{background:#eaf4ef;color:var(--success)}
+    .result-icon.bad{background:#f9ecec;color:var(--danger)}
+    .result h2{
+      margin:0 0 10px;
+      font-size:28px;
+      color:var(--navy);
+      letter-spacing:-.02em;
+    }
+    .result p{
+      margin:0 auto 18px;
+      max-width:500px;
+      font-size:14.5px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .call-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      width:100%;
+      padding:18px 20px;
+      border-radius:14px;
+      text-decoration:none;
+      background:var(--navy);
+      color:#fff;
+      font-size:18px;
+      font-weight:800;
+      margin-top:4px;
+    }
+    .call-sub{
+      margin-top:10px !important;
+      font-size:12.5px !important;
+    }
+
+    .handoff{
+      margin-top:18px;
+      border:1px solid var(--line);
+      background:#f8fafc;
+      border-radius:13px;
+      padding:14px 15px;
+      text-align:left;
+      font-size:13px;
+      line-height:1.55;
+      color:var(--ink);
+    }
+
+    .fine-print{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      font-size:10.5px;
+      line-height:1.6;
+      text-align:center;
+      color:#7b858e;
+    }
+
+    @media (max-width:480px){
+      .options{grid-template-columns:1fr}
+      .card{padding:24px 18px 20px}
+      .wrap{padding-top:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Accident Claim Review</div>
+      <div class="step-text" id="stepText">Question 1 of 6</div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="intro" id="intro">
+      <div class="eyebrow">Free Initial Review</div>
+      <h1>See If Your Vehicle Accident May Qualify for a Case Review</h1>
+      <p>Answer a few brief questions. Your responses help determine whether you may be eligible to speak with an intake specialist.</p>
+    </div>
+
+    <section class="card">
+      <div class="progress" id="progressWrap"><div class="progress-fill" id="progressFill"></div></div>
+
+      <div class="panel active" data-step="1">
+        <div class="q-kicker">Question 1</div>
+        <h2 class="question">Were you physically injured in a motor vehicle accident?</h2>
+        <p class="helper">This review is intended for people who experienced a physical injury in the accident.</p>
+        <div class="options">
+          <button class="option" data-answer="yes">Yes</button>
+          <button class="option" data-answer="no" data-disqualify="true">No</button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="2">
+        <div class="q-kicker">Question 2</div>
+        <h2 class="question">Did the accident happen within the last 6 months?</h2>
+        <p class="helper">The incident must have occurred within the past 0 to 6 months.</p>
+        <div class="options">
+          <button class="option" data-answer="yes">Yes</button>
+          <button class="option" data-answer="no" data-disqualify="true">No</button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="3">
+        <div class="q-kicker">Question 3</div>
+        <h2 class="question">Were you not at fault for the accident?</h2>
+        <p class="helper">To continue, the accident should have been caused primarily by another party.</p>
+        <div class="options">
+          <button class="option" data-answer="yes">Yes</button>
+          <button class="option" data-answer="no" data-disqualify="true">No</button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="4">
+        <div class="q-kicker">Question 4</div>
+        <h2 class="question">Are you currently represented by an attorney for this accident?</h2>
+        <p class="helper">This review is for people who are not currently represented by an attorney for this matter.</p>
+        <div class="options">
+          <button class="option" data-answer="no">No</button>
+          <button class="option" data-answer="yes" data-disqualify="true">Yes</button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="5">
+        <div class="q-kicker">Question 5</div>
+        <h2 class="question">Are you actively seeking legal representation for your accident?</h2>
+        <p class="helper">You should currently be interested in speaking with a legal intake team about your options.</p>
+        <div class="options">
+          <button class="option" data-answer="yes">Yes</button>
+          <button class="option" data-answer="no" data-disqualify="true">No</button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="6">
+        <div class="q-kicker">Question 6</div>
+        <h2 class="question">What state are you currently located in?</h2>
+        <p class="helper">Eligibility may depend on location. Select your current state so the intake team can confirm availability.</p>
+        <select id="stateSelect" aria-label="Select your state">
+          <option value="">Select a state</option>
+          <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+          <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+          <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+          <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+          <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+          <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+          <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+          <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+          <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+          <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+          <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+          <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+          <option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option>
+        </select>
+        <button class="continue-btn" id="stateContinue" disabled>Continue</button>
+      </div>
+
+      <div class="panel" id="qualifiedPanel">
+        <div class="result">
+          <div class="result-icon good">✓</div>
+          <h2>You May Be Eligible for a Case Review</h2>
+          <p>Based on your answers, you may be eligible to speak with an intake specialist about your accident. Eligibility is not guaranteed and will be confirmed during the call.</p>
+
+          <a class="call-btn" href="tel:+18665860558" id="callBtn">📞 Call (866) 586-0558</a>
+          <p class="call-sub">Tap to speak with an intake specialist now.</p>
+
+          <div class="handoff">
+            <strong>What happens next:</strong> You will be connected live to an intake team member who can review your answers, ask any necessary follow-up questions, and explain the next steps. Please remain on the line so the review can be completed directly.
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="disqualifiedPanel">
+        <div class="result">
+          <div class="result-icon bad">×</div>
+          <h2>Unfortunately, You Do Not Qualify</h2>
+          <p>Based on the answers provided, you do not currently meet the criteria for this accident case review. Thank you for taking the time to complete the questionnaire.</p>
+        </div>
+      </div>
+
+      <div class="fine-print" id="finePrint">
+        This website is not a law firm and does not provide legal advice. Submitting answers or placing a call does not create an attorney-client relationship. Case acceptance and any potential recovery depend on the specific facts, applicable law, and review by a participating legal provider. No result or compensation is guaranteed.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const totalSteps = 6;
+      let currentStep = 1;
+      const panels = Array.from(document.querySelectorAll('.panel[data-step]'));
+      const stepText = document.getElementById('stepText');
+      const progressFill = document.getElementById('progressFill');
+      const progressWrap = document.getElementById('progressWrap');
+      const intro = document.getElementById('intro');
+      const qualifiedPanel = document.getElementById('qualifiedPanel');
+      const disqualifiedPanel = document.getElementById('disqualifiedPanel');
+      const stateSelect = document.getElementById('stateSelect');
+      const stateContinue = document.getElementById('stateContinue');
+
+      function updateProgress(){
+        stepText.textContent = `Question ${currentStep} of ${totalSteps}`;
+        progressFill.style.width = `${((currentStep-1)/totalSteps)*100}%`;
+      }
+
+      function showStep(step){
+        panels.forEach(p => p.classList.remove('active'));
+        const target = document.querySelector(`.panel[data-step="${step}"]`);
+        if(target){
+          target.classList.add('active');
+          currentStep = step;
+          updateProgress();
+          window.scrollTo({top:0, behavior:'smooth'});
+        }
+      }
+
+      function showResult(type){
+        panels.forEach(p => p.classList.remove('active'));
+        qualifiedPanel.classList.remove('active');
+        disqualifiedPanel.classList.remove('active');
+        progressWrap.style.display = 'none';
+        stepText.textContent = '';
+        intro.style.display = 'none';
+        (type === 'qualified' ? qualifiedPanel : disqualifiedPanel).classList.add('active');
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
+
+      document.querySelectorAll('.option').forEach(btn => {
+        btn.addEventListener('click', function(){
+          if(this.dataset.disqualify === 'true'){
+            showResult('disqualified');
+            return;
+          }
+          if(currentStep < totalSteps){
+            showStep(currentStep + 1);
+          }
+        });
+      });
+
+      stateSelect.addEventListener('change', function(){
+        stateContinue.disabled = !this.value;
+      });
+
+      stateContinue.addEventListener('click', function(){
+        if(!stateSelect.value) return;
+        // No specific eligible-state list was provided. State is collected for intake review.
+        showResult('qualified');
+      });
+
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
