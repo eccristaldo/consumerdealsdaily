@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accident Claim Review</title>
 
-  <!-- Ringba pool script: loads immediately (no delayed injection) -->
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TenQWqnl7CX_CIi5z5XNwG5gRqMJ0zWkJzEAVuRIF6RY2B8a3-1FVjN2w4sWcLZaW3ASfIcD_F9B4N-wOVoPMgwQH85el-Eh7lkvCdYQzWLs0j4wmcyGbFnLxkQTJR_nBfyuwAwFvlcMzYxoCEqVAPUoVej0SljN35jMblIdNA7SffGshPLx3rYwqo39bIQAoN8JFPixIq6OYVzzULFaG9a7oPyx03W5MxElFzAR5DqGyX21c5ZhYjoCkUNF_G-5GP6tUUOLb2ryB29nmFAP_I7PgLzS_1TsZ8ZzPJ9TQLdZ00ZDphfGsbP1qJ9MokWm" charset="UTF-8"></script><script src="//b-js.ringba.com/CAd6c6c7e92725443180763700cb56ce11" async></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -405,6 +403,17 @@
       const stateSelect = document.getElementById('stateSelect');
       const stateContinue = document.getElementById('stateContinue');
 
+      // Ringba pool script is injected only when the qualified CTA is revealed.
+      let ringbaLoaded = false;
+      function loadRingbaScript(){
+        if (ringbaLoaded) return;
+        ringbaLoaded = true;
+        const script = document.createElement('script');
+        script.src = '//b-js.ringba.com/CAd6c6c7e92725443180763700cb56ce11';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+
       function updateProgress(){
         stepText.textContent = `Question ${currentStep} of ${totalSteps}`;
         progressFill.style.width = `${((currentStep-1)/totalSteps)*100}%`;
@@ -429,6 +438,7 @@
         stepText.textContent = '';
         intro.style.display = 'none';
         (type === 'qualified' ? qualifiedPanel : disqualifiedPanel).classList.add('active');
+        if(type === 'qualified') loadRingbaScript();
         window.scrollTo({top:0, behavior:'smooth'});
       }
 
