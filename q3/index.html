@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=y9_SRa9MU6iMtN3ok9KC_amep7kjH-2knfyWAPcCiJXDvP4qliliBp6G2FK7rxTxx4rXndfnYfO5RvnkP7qPA7l_49L63GpztLn_fMDiiaHk5GU2uICk6p3hns-A-wxEXFW28hCXXvl9cpXfZGNSD4xsrSRopBSxeLyUHtTnDrsFlrN2Wtk8nMdPK3-qP0LrbnmNPd_ygibHbFe0FNL9FM78odpOW2_E8PKsy2CcsKUCwHMKc7sCya81JMMl_vrdC7IGKij0rSdl0AlSUMM7-_GPQHao9GIVLie9y8iqfSUbR4AVkwZhaNfLIU2-L8Zw" charset="UTF-8"></script><script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beneficio de Gastos Finales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root { --ink:#142c49; --blue:#245ca4; --line:#cbd9e8; --muted:#4f6174; }
+* { box-sizing:border-box; }
+body { margin:0; border-top:5px solid var(--ink); background:white; color:var(--ink); font:17px/1.5 Inter,Arial,sans-serif; }
+main { max-width:640px; margin:auto; padding:clamp(24px,6vh,64px) clamp(20px,5vw,42px) 48px; }
+.panel { display:none; }
+.panel.active { display:block; }
+.hero-badge,.q-label,.result-badge { color:var(--blue); font-weight:700; font-size:14px; }
+.hero-badge { display:flex; align-items:center; gap:10px; }
+.hero-badge::before { content:''; width:24px; height:3px; background:var(--blue); flex:none; }
+h1,h2,p { margin:0; }
+h1 { margin:15px 0 12px; font-size:clamp(30px,7.5vw,48px); line-height:1.09; font-weight:600; letter-spacing:-.035em; text-wrap:balance; }
+.hl { font-weight:800; color:var(--blue); }
+.subhead,.result-text,.loading-sub,.amount-label { color:var(--muted); }
+.subhead { margin-bottom:clamp(24px,5vh,44px); }
+.q-label::after { content:''; display:block; height:4px; margin:9px 0 18px; border-radius:3px; background:linear-gradient(to right,var(--blue) 50%,#e3eaf2 50%); }
+#panel-2 .q-label::after { background:var(--blue); }
+h2 { font-size:clamp(23px,5vw,30px); line-height:1.2; letter-spacing:-.025em; }
+.tap-grid { display:grid; gap:10px; margin-top:17px; }
+.tap-btn { width:100%; display:flex; justify-content:space-between; align-items:center; text-align:left; padding:15px 19px; min-height:58px; background:#fff; border:1.5px solid #6f8cab; border-radius:8px; font:600 19px/1.35 Inter,Arial,sans-serif; color:var(--ink); cursor:pointer; }
+.tap-btn::after { content:''; width:9px; height:9px; border:solid var(--blue); border-width:2px 2px 0 0; transform:rotate(45deg); }
+.tap-btn:hover,.tap-btn:active { background:#eff5fc; border-color:var(--blue); }
+:focus-visible { outline:3px solid #2167c0; outline-offset:3px; }
+.panel:focus { outline:0; }
+.loading-sub,.result-text { margin-top:8px; }
+.load-list { list-style:none; padding:0; margin:24px 0; border-top:1px solid var(--line); }
+.load-item { padding:16px 0; border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:center; }
+.load-ic { border:2px solid var(--line); width:23px; height:23px; flex:none; border-radius:50%; display:grid; place-items:center; }
+.check { display:none; }
+.processing .load-ic { border-color:#c9daed; border-top-color:var(--blue); animation:turn .8s linear infinite; }
+.done .load-ic { background:var(--blue); border-color:var(--blue); color:white; }
+.done .check { display:block; font-size:15px; line-height:1; }
+@keyframes turn { to {transform:rotate(360deg);} }
+@media(prefers-reduced-motion:reduce){ .processing .load-ic {animation:none;} }
+.amount-glow { font-size:clamp(48px,12vw,68px); line-height:1.12; font-weight:800; letter-spacing:-.05em; margin-top:8px; }
+.amount-label { padding-bottom:18px; margin-bottom:20px; border-bottom:1px solid var(--line); }
+.countdown-box { margin:18px 0 8px; font-size:15px; }
+.countdown-num { font-variant-numeric:tabular-nums; font-weight:750; }
+.call-btn { display:grid; justify-items:center; padding:12px; border-radius:8px; background:#137142; color:white; text-decoration:none; font-weight:800; font-size:22px; }
+.call-btn span { font-size:18px; font-weight:600; }
+.call-btn:hover { background:#0c5a33; }
+.free-note { margin:8px 0 22px; font-size:14px; text-align:center; color:var(--muted); }
+.instructions-box { background:#f2f6fa; border-left:3px solid var(--blue); padding:16px 19px; }
+.instructions-title { font-weight:750; }
+.instructions-list { padding-left:22px; margin:7px 0 0; }
+.instructions-list li { padding:3px 0; }
+.final-warning { margin-top:20px; font-size:14px; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <main>
+      <!-- STEP 1: hero + question -->
+      <section tabindex="-1" class="panel active" id="panel-1">
+        <div class="hero-badge">Programa vigente 2026 · Atención en español</div>
+        <h1>Podrías calificar para <span class="hl">hasta $25,000</span> en gastos finales</h1>
+        <p class="subhead">Responde 2 preguntas rápidas y descubre tu resultado en menos de 60 segundos.</p>
+
+        <div class="q-label">Pregunta 1 de 2</div>
+        <h2 class="question">¿Tienes 50 años o más?</h2>
+        <div class="tap-grid">
+          <button class="tap-btn" data-next="2">Sí, tengo 50 o más</button>
+          <button class="tap-btn" data-next="2">No</button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section tabindex="-1" class="panel" id="panel-2">
+        <div class="q-label">Pregunta 2 de 2</div>
+        <h2 class="question">¿Resides actualmente en Estados Unidos?</h2>
+        <div class="tap-grid">
+          <button class="tap-btn" data-next="loading">Sí, vivo en EE.UU.</button>
+          <button class="tap-btn" data-next="loading">No</button>
+        </div>
+      </section>
+
+      <!-- LOADING -->
+      <section tabindex="-1" class="panel loading-panel" id="panel-loading">
+        <h2 class="loading-title">Calculando tu resultado...</h2>
+        <p class="loading-sub">Esto toma solo unos segundos</p>
+        <ul class="load-list">
+          <li class="load-item" id="load-1">
+            <div class="load-ic" aria-hidden="true"><div class="check">✓</div></div>
+            <span>Confirmando elegibilidad del beneficio</span>
+          </li>
+          <li class="load-item" id="load-2">
+            <div class="load-ic" aria-hidden="true"><div class="check">✓</div></div>
+            <span>Verificando disponibilidad en tu zona</span>
+          </li>
+          <li class="load-item" id="load-3">
+            <div class="load-ic" aria-hidden="true"><div class="check">✓</div></div>
+            <span>Conectando con un especialista en español</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- RESULT -->
+      <section tabindex="-1" class="panel result-panel" id="panel-3">
+        <div class="result-badge">¡Buenas noticias!</div>
+
+        <div class="amount-glow">$25,000</div>
+        <p class="amount-label">Beneficio estimado de gastos finales</p>
+
+        <h2 class="result-title">Un especialista en español está listo para confirmar tu elegibilidad</h2>
+        <p class="result-text">Habla con un especialista ahora mismo para revisar tu caso y los próximos pasos.</p>
+
+        <div class="countdown-box">Tu turno se reserva por <span class="countdown-num" id="countdown">10:00</span></div>
+
+        <a class="call-btn" id="call-btn" href="tel:+18777600183">
+          LLAMAR AHORA <span>(877) 760-0183</span>
+        </a>
+
+        <p class="free-note">Llamada sin costo desde cualquier teléfono en EE.UU.</p>
+
+        <div class="instructions-box">
+          <p class="instructions-title">Qué hacer ahora:</p>
+          <ol class="instructions-list">
+            <li>Toca el botón de arriba para abrir tu marcador.</li>
+            <li>Presiona el ícono verde de llamada en tu teléfono.</li>
+            <li>Habla con el especialista y confirma tu elegibilidad en pocos minutos.</li>
+          </ol>
+        </div>
+
+        <p class="final-warning">La disponibilidad de especialistas es limitada y puede variar según tu zona. Este no es un programa gubernamental.</p>
+      </section>
+  </main>
+<script>
+  const panels = document.querySelectorAll('.panel');
+  const panelMap = { '1':'panel-1', '2':'panel-2', 'loading':'panel-loading', '3':'panel-3' };
+
+
+  // ===== RINGBA: se inyecta UNA sola vez, exactamente cuando se muestra el CTA final (step 3) =====
+  let ringbaLoaded = false;
+  function loadRingbaScript(){
+    if (ringbaLoaded) return;
+    ringbaLoaded = true;
+    const script = document.createElement('script');
+    script.src = '//b-js.ringba.com/CAc55ef76f78e6495c85f1660584a317d0'; // mismo pool que la lander de FE actual
+    script.async = true;
+    script.onload = function(){ console.log('[Ringba] pool script loaded OK'); };
+    script.onerror = function(){ console.error('[Ringba] pool script FAILED to load'); };
+    document.head.appendChild(script);
+  }
+
+  function goToStep(stepKey){
+    const targetId = panelMap[stepKey];
+    panels.forEach(p => p.classList.toggle('active', p.id === targetId));
+    document.getElementById(targetId).focus({preventScroll:true});
+    window.scrollTo({top:0, behavior:'instant'});
+
+    if (stepKey === 'loading') runLoadingSequence();
+    if (stepKey === '3'){
+      loadRingbaScript();   // <- pool number swap happens only here, on CTA reveal
+      startCountdown(600);
+    }
+  }
+
+  document.querySelectorAll('.tap-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> goToStep(btn.dataset.next));
+  });
+
+  function runLoadingSequence(){
+    const items=[document.getElementById('load-1'),document.getElementById('load-2'),document.getElementById('load-3')];
+    items.forEach(i=>i.classList.remove('processing','done'));
+
+    const stepDuration=1300;
+    const totalDuration=items.length*stepDuration+500;
+
+    items.forEach((item,index)=>{
+      setTimeout(()=>item.classList.add('processing'), index*stepDuration);
+      setTimeout(()=>{item.classList.remove('processing'); item.classList.add('done');}, (index+1)*stepDuration);
+    });
+
+    setTimeout(()=>goToStep('3'), totalDuration);
+  }
+
+  function startCountdown(seconds){
+    const el=document.getElementById('countdown');
+    let remaining=seconds;
+    function render(){
+      const m=String(Math.floor(remaining/60)).padStart(2,'0');
+      const s=String(remaining%60).padStart(2,'0');
+      el.textContent=`${m}:${s}`;
+    }
+    render();
+    const iv=setInterval(()=>{
+      remaining--;
+      if (remaining<0){ clearInterval(iv); return; }
+      render();
+    }, 1000);
+  }
+</script>
+</body>
+</html>
