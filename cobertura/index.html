@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consulta sobre seguros de vida para gastos finales</title>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=XY1NnhEJ4CXH826BDvuePa2wgQiGxg7ekuEBxoGSMkR8jAn0KyJlPhnndLEgy7dbfNeNSW7CPNyI2DoVKNwNn3ks75gI8FqIM9h_M42cPtjsEQxr_xpoMvqIUd0x2qjTecALGtFTt05Ytf3vTDYJiwqSeImHxvBGDApuVtpB2fBrChoC9ymJ60VLxkacEyQvp--Ez0jDJl_XpYdgXUY0Wr-csEhQQ2_hL6xJ3Qyq8Njx6V1Mag_ZR4UZgpUW5l-qa6wXWWGLIEDdk3ZgryEGl49abEw5O_VbUSneqFFAJGOgbvmbQHuOA6bDL8BY_Pr4" charset="UTF-8"></script><style>
+:root{color-scheme:light;--ink:#163d37;--green:#176353;--line:#cedbd3}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f5ee;color:var(--ink);font:18px/1.5 "Atkinson Hyperlegible Next",system-ui,sans-serif}
+main{width:min(100% - 32px,630px);margin:clamp(24px,8vh,86px) auto}
+header{border-bottom:1px solid #bacbc0;padding:0 2px 18px;display:flex;align-items:center;gap:12px;font-weight:650}
+.mark{width:24px;height:29px;border-radius:16px 1px;background:var(--green);box-shadow:inset -7px 0 #93b49a;flex:none}
+article{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(22px,5vw,46px);margin-top:22px;box-shadow:0 7px 30px #163d3709}
+.step{font-size:.88rem;color:#52665c;margin:0}
+.track{display:flex;gap:6px;margin:10px 0 28px}
+.track i{height:4px;flex:1;background:#e3e9e4;border-radius:2px}
+.track .on{background:var(--green)}
+h1{font:normal clamp(2rem,6vw,2.8rem)/1.1 "Source Serif 4",Georgia,serif;letter-spacing:-.035em;margin:0 0 14px;text-wrap:balance}
+p{margin:0 0 20px}button,a{font:inherit}
+.choice,.call{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px;border:1px solid #a8c2b5;border-radius:10px;background:#f8fbf8;color:var(--ink);text-align:left;cursor:pointer;margin:10px 0 0}
+.choice::after{content:"";width:8px;height:8px;border:solid var(--green);border-width:2px 2px 0 0;transform:rotate(45deg);flex:none}
+.choice:hover{background:#edf5ef;border-color:var(--green)}
+.call{background:var(--green);color:white;border:0;flex-direction:column;gap:2px;text-decoration:none;text-align:center;font-weight:700}
+.call small{font-weight:500;font-size:1rem}.call:hover{background:#124f43}
+.back{border:0;background:none;padding:12px 0;color:var(--green);text-decoration:underline;cursor:pointer;margin-top:10px}
+:focus-visible{outline:3px solid #ad6400;outline-offset:4px}
+footer{margin:20px 3px;font-size:.9rem;color:#4b6055}
+</style>
+</head>
+<body>
+<main>
+<header><span class="mark" aria-hidden="true"></span>Seguro de vida para gastos finales</header>
+<article>
+<p class="step" id="step">Pregunta 1 de 2</p>
+<div class="track" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+<section>
+<h1 tabindex="-1">¿Qué tema te gustaría consultar?</h1>
+<p>Elige un tema para preparar tu llamada con un agente de seguros.</p>
+<button class="choice" data-topic="coverage">Qué cubre el seguro</button>
+<button class="choice" data-topic="cost">Cuánto cuesta una póliza</button>
+</section>
+<section hidden>
+<h1 tabindex="-1">¿Qué detalle te interesa conocer?</h1>
+<div id="details"></div>
+<button class="back">Volver</button>
+</section>
+<section hidden>
+<h1 tabindex="-1">Habla con un agente en español</h1>
+<p>Puedes empezar la llamada con esta pregunta:</p>
+<blockquote id="prompt" style="margin:0 0 22px;border-left:3px solid #93b49a;padding-left:16px"></blockquote>
+<!-- Reemplaza el número ficticio tanto en href como en el texto visible. -->
+<a class="call" href="tel:+12025550147">Llamar a un agente <small>(202) 555-0147</small></a>
+<button class="back">Volver</button>
+</section>
+<noscript>Activa JavaScript para responder las dos preguntas.</noscript>
+</article>
+<footer>Información comercial sobre seguros. La cobertura, el costo y las condiciones dependen de la póliza y de la aseguradora.</footer>
+</main>
+<script>
+const topics = {
+  coverage: [
+    ['Gastos que se pueden cubrir', '¿Cómo se puede usar la cobertura para los gastos funerarios?'],
+    ['Exclusiones y períodos de espera', '¿Qué exclusiones o períodos de espera tiene la póliza?']
+  ],
+  cost: [
+    ['El pago mensual', '¿Cuál sería el pago mensual y qué incluye?'],
+    ['Cambios en el precio', '¿El pago se mantiene igual o puede cambiar con el tiempo?']
+  ]
+};
+const sections = [...document.querySelectorAll('section')];
+function show(index) {
+  sections.forEach((section, i) => { section.hidden = i !== index; });
+  document.querySelectorAll('.track i').forEach((bar, i) => bar.classList.toggle('on', i <= index));
+  document.querySelector('#step').textContent = ['Pregunta 1 de 2', 'Pregunta 2 de 2', 'Consulta por teléfono'][index];
+  sections[index].querySelector('h1').focus();
+}
+document.querySelectorAll('[data-topic]').forEach(button => {
+  button.addEventListener('click', () => {
+    const details = document.querySelector('#details');
+    details.replaceChildren();
+    for (const [label, question] of topics[button.dataset.topic]) {
+      const option = document.createElement('button');
+      option.className = 'choice';
+      option.textContent = label;
+      option.onclick = () => {
+        document.querySelector('#prompt').textContent = question;
+        show(2);
+      };
+      details.append(option);
+    }
+    show(1);
+  });
+});
+document.querySelectorAll('.back').forEach((button, i) => button.onclick = () => show(i));
+</script>
+</body>
+</html>
